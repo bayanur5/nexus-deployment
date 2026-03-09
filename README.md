@@ -30,3 +30,57 @@ nexus-deployment/
 
 
 
+---
+
+## Deployment Diagram
+
+<p align="center">
+  <img src="docs/nexus-workflow.png" alt="Deployment Workflow" width="600">
+</p>
+
+---
+
+## Deployment Steps
+
+1️⃣ **Clone Repository**
+
+```bash
+git clone https://github.com/bayanur5/nexus-deployment.git
+cd nexus-deployment
+
+
+2️⃣ Install Nexus with Ansible
+
+cd NexusProject/step2-ansible
+ansible-playbook -i inventory install_nexus.yml
+
+
+
+3️⃣ Build Nexus AMI with Packer
+
+cd ../step3-packer
+packer build nexus.pkr.hcl
+
+4️⃣ Provision Infrastructure with Terraform
+
+cd ../../terraform-nexus-workflow
+terraform init
+terraform plan
+terraform apply
+
+
+5️⃣ Access Nexus
+
+URL: http://<EC2_PUBLIC_IP>:8081
+Admin password: /opt/sonatype-work/nexus3/admin.password
+
+
+Author
+GitHub: bayanur5
+
+Technologies Used
+AWS EC2
+Terraform
+Packer
+Ansible
+Nexus Repository Manager
